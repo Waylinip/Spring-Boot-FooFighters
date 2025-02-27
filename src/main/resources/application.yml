@@ -1,0 +1,57 @@
+spring:
+  application:
+    name: ms-human
+
+  datasource:
+    url: jdbc:mysql://localhost:3306/fighters
+    username: root
+    password: root_password
+    driver-class-name: com.mysql.cj.jdbc.Driver
+
+  liquibase:
+    change-log: classpath:/liquibase/changelog-master.yml
+    enabled: true
+
+  jpa:
+    hibernate:
+      ddl-auto: update
+      show-sql: true
+
+server:
+  port: 8080
+
+#databaseChangeLog:
+#
+#  - changeSet:
+#      id: 1
+#      author: Marukovich Daniil
+#      changes:
+#        - createTable:
+#            tableName: humans
+#            schemaName: fighters
+#            columns:
+#              - column:
+#                  name: id
+#                  type: BIGINT
+#                  autoIncrement: true
+#                  constraints:
+#                    primaryKey: true
+#                    nullable: false
+#              - column:
+#                  name: name
+#                  type: VARCHAR(255)
+#                  constraints:
+#                    nullable: false
+#              - column:
+#                  name: age
+#                  type: INT
+#                  constraints:
+#                    nullable: false
+#              - column:
+#                  name: created_at
+#                  type: TIMESTAMP
+#                  defaultValueComputed: CURRENT_TIMESTAMP
+#              - column:
+#                  name: updated_at
+#                  type: TIMESTAMP
+#                  defaultValueComputed: CURRENT_TIMESTAMP

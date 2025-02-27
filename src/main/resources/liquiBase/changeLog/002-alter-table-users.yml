@@ -1,0 +1,9 @@
+databaseChangeLog:
+  - changeSet:
+      id: 2
+      author: Marukovich Daniil
+      changes:
+        - modifyDataType:
+            tableName: humans
+            columnName: age
+            newDataType: SMALLINT
