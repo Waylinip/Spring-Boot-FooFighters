@@ -3,9 +3,10 @@ package org.example.springbootfoofighters.service;
 import lombok.RequiredArgsConstructor;
 import org.example.springbootfoofighters.DTO.UserDTO;
 import org.example.springbootfoofighters.Entity.UserEntity;
-import org.example.springbootfoofighters.mapping.HumanMapper;
 import org.example.springbootfoofighters.mapping.UserMapper;
+import org.example.springbootfoofighters.rabbitmq.RabbitMessageSender;
 import org.example.springbootfoofighters.repository.UserRepository;
+import org.springframework.amqp.rabbit.core.RabbitTemplate;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -16,6 +17,7 @@ public class UserService {
 
     private final UserRepository userRepository;
     private final UserMapper userMapper;
+    private final RabbitMessageSender rabbitMessageSender;
 
  public List<UserDTO> findAll() {
      return userMapper.toUserDTOs(userRepository.findAll());
@@ -26,6 +28,7 @@ public class UserService {
  }
 
  public  UserEntity  save(UserDTO userDTO) {
+     rabbitMessageSender.send(userDTO);
       return userRepository.save(userMapper.toUserEntity(userDTO));
  }
 
